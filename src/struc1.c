@@ -9,7 +9,15 @@ int main()
     c=CouleurParNom("green");
     c=CouleurParComposante(91,222,122);
     EffacerEcran(c);
+    int x = 50;
+    int y = 50;
+    while (1){
+        x+= 10;
+        y +=10;
+        RemplirRectangle(x,y,10,10);
+    }
     Touche();
     FermerGraphique();
-    return EXIT_SUCCESS;
+    int x = 300 ;int y = 250
+   return EXIT_SUCCESS;
     }
