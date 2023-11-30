@@ -1,6 +1,5 @@
 #include "struct1.c"
-#include "graph.h"
-#include "time.h"
+
 
 void controle_jeu(struct Serpent *serpent){
     while(ToucheEnAttente()){
