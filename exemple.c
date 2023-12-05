@@ -1,10 +1,10 @@
 #include<stdlib.h>
 #include<graph.h>
  
-int main()
+int main(void)
 {
     InitialiserGraphique();
-    CreerFenetre(10,10,1000,800);
+    CreerFenetre(10,10,600,500);
     couleur c;
     c=CouleurParNom("green");
     c=CouleurParComposante(91,222,122);
