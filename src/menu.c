@@ -1,96 +1,89 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<graph.h>
-<<<<<<< HEAD
+#include <stdio.h>
+#include <stdlib.h>
+#include <graph.h>
 
+#define WINDOW_WIDTH 800 /*Remplacez par la largeur souhaitée*/
+#define WINDOW_HEIGHT 500 /*Remplacez par la hauteur souhaitée*/
+int rows;
+int cols;
+int couleurTexte;
+int couleurFond;
+int couleurBordure;
+int epaisseur;
+int x;
+int y;
+int x, y, width, height;
+int boucle = 1;
 
-void afficher_menu(zone titre, zone selection, zone facile, zone moyen, zone difficile, zone quitter) {
-    ChargerImageFond("./img/backgrounds/menu.png");
-    dessiner_bouton(titre, "JEU DE SERPENT", CouleurParNom("black"), CouleurParNom("white"), CouleurParNom("white"), 2);
-=======
-#include"../include/main.h"
-#include"../include/game.h"
+typedef struct {
+    
+} Zone;
 
-void afficher_menu(zone titre, zone selection, zone facile, zone moyen, zone difficile, zone quitter) {
-    ChargerImageFond("./img/backgrounds/menu.gif");
-    dessiner_bouton(titre, "JEU DU SERPENT !", CouleurParNom("black"), CouleurParNom("white"), CouleurParNom("white"), 2);
->>>>>>> @{u}
+int game() {
+    /*Fonction game à implémenter*/ 
+    /*Retourne 1 si le jeu a réussi, 0 sinon*/
+    return 1; /*À remplacer avec l'implémentation réelle*/
+}
+
+void dessiner_bouton(Zone zone, char* texte) {
+    /*Implémentation de dessiner_bouton*/
+    /*À remplir avec le code nécessaire*/
+}
+
+int check_zone(Zone zone) {
+    /*Implémentation de check_zone*/
+    /*À remplir avec le code nécessaire*/
+    return 0; /*À remplacer avec l'implémentation réelle*/
+}
+
+void afficher_menu(Zone titre, Zone selection, Zone facile, Zone moyen, Zone difficile) {
+    ChargerImageFond("menu.png");
+    dessiner_bouton(titre, "JEU DE PAIRES !", CouleurParNom("black"), CouleurParNom("white"), CouleurParNom("white"), 2);
     dessiner_bouton(selection, "Selectionnez un niveau :", CouleurParNom("black"), CouleurParNom("white"), CouleurParNom("white"), 1);
     dessiner_bouton(facile, "Facile", CouleurParNom("black"), CouleurParNom("dark green"), CouleurParNom("dark green"), 1);
     dessiner_bouton(moyen, "Moyen", CouleurParNom("black"), CouleurParNom("orange"), CouleurParNom("orange"), 1);
     dessiner_bouton(difficile, "Difficile", CouleurParNom("black"), CouleurParNom("red"), CouleurParNom("red"), 1);
-    dessiner_bouton(quitter, "QUITTER", CouleurParNom("red"), CouleurParNom("red"), CouleurParNom("white"), 1);
-}
-<<<<<<< HEAD
-void menu(void) {
-=======
 
-void menu(void){
->>>>>>> @{u}
-    zone titre = {490, 60, 260, 55};
-    zone selection = {42, 300, 230, 35};
-    zone facile = {42, 375, 85, 35};
-    zone moyen = {42, 450, 85, 35};
-    zone difficile = {42, 525, 85, 35};
-    zone quitter = {42, 605, 100, 35};
-    afficher_menu(titre, selection, facile, moyen, difficile, quitter);
-    int boucle = 1;
-<<<<<<< HEAD
     while (boucle) {
         SourisPosition();
         if (SourisCliquee()) {
-	    if (check_zone(facile, _X, _Y)) {
-	    	if(game(2, 2)) {
-		    afficher_menu(titre, selection, facile, moyen, difficile, quitter);
-		} else {
-		    boucle = 0;
-		}
-	    }
-	    if (check_zone(moyen, _X, _Y)) {
-	    	if (game(4, 4)) {
-		    afficher_menu(titre, selection, facile, moyen, difficile, quitter);
-		} else {
-		    boucle = 0;
-		}
-	    }
-	    if (check_zone(difficile, _X, _Y)) {
-	    	if (game(8, 8)) {
-		    afficher_menu(titre, selection, facile, moyen, difficile, quitter);
-		} else {
-		    boucle = 0;
-		}
-	    }
-            if (check_zone(quitter, _X, _Y)) boucle = 0;
-        }
-    }
-}
-=======
-    while (boucle){
-        SourisPosition();
-        if (SourisCliquee()) {
-            if (check_zone(facile, _X, _Y)){
+            if (check_zone(facile, 396.3, 219)) {
                 if(game(2, 2)) {
-                    afficher_menu(titre, selection, facile, moyen, difficile, quitter);
+                    afficher_menu(titre, selection, facile, moyen, difficile);
                 } else {
                     boucle = 0;
                 }
             }
-            if (check_zone(moyen, _X, _Y)) {
+            if (check_zone(moyen, 395.3, 287.2)) {
                 if (game(4, 4)) {
-                    afficher_menu(titre, selection, facile, moyen, difficile, quitter);
+                    afficher_menu(titre, selection, facile, moyen, difficile);
                 } else {
                     boucle = 0;
                 }
             }
-            if (check_zone(difficile, _X, _Y)) {
+            if (check_zone(difficile, 395.1, 354.6)) {
                 if (game(8, 8)) {
-                    afficher_menu(titre, selection, facile, moyen, difficile, quitter);
+                    afficher_menu(titre, selection, facile, moyen, difficile);
                 } else {
                     boucle = 0;
                 }
             }
-            if (check_zone(quitter, _X, _Y)) boucle = 0;
         }
     }
 }
->>>>>>> @{u}
+
+int main(void) {
+    InitialiserGraphique();
+    CreerFenetre(375, 175, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+    Zone titre = {490, 60, 260, 55};
+    Zone selection = {42, 300, 230, 35};
+    Zone facile = {42, 375, 85, 35};
+    Zone moyen = {42, 450, 85, 35};
+    Zone difficile = {42, 525, 85, 35};
+
+    afficher_menu(titre, selection, facile, moyen, difficile);
+    
+    FermerGraphique();
+    return EXIT_SUCCESS;
+}
