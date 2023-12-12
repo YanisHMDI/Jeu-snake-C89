@@ -4,40 +4,9 @@
 #define CYCLE 10000L
 
 
-int seconde=0;
-int minute=0;
-int seconde_actuel=0;
-int old_seconde=0;
-char timer[6];
-unsigned long int suivant;
 
 
-int go_on=1;
-unsigned long int suivant;
-
-int serpent;
-int x = 600;
-int y = 400;
-int direction = 4;
-int t;
-int paused = 0;
-
-int segment=10;
-int i=0;
-int pos_x[60];
-int pos_y[60];
-int old_x[60];
-int old_y[60];
-
-int p=0;
-int pp=0;
-int pomme, pommex[5], pommey[5];
-int fond;
-
-char score[4];
-int Nbr;
-
-void DessinerScene() {
+void DessinerScene(int x, int y, int direction, int serpent, int segment, int pos_x[], int pos_y[], int old_x[], int old_y[], int pomme, int pommex[], int pommey[], int fond){
     snprintf(timer, 6, "%02d:%02d", minute, seconde);
     ChoisirCouleurDessin(CouleurParComposante(128, 255, 0));
     RemplirRectangle(20, 20, 1160, 700);
@@ -56,8 +25,8 @@ void DessinerScene() {
     srand(time(NULL));
     pomme = ChargerSprite("pomme.png");
     for (p = 0; p < 5; p++) {
-        pommex[p] = ((rand() % (56) + 1) * 20);
-        pommey[p] = ((rand() % (33) + 1) * 20);
+        pommex[p] = ((rand() % (57) + 1) * 20);
+        pommey[p] = ((rand() % (34) + 1) * 20);
         AfficherSprite(pomme, pommex[p], pommey[p]);
     }
 
@@ -65,9 +34,7 @@ void DessinerScene() {
     RemplirRectangle(0, 700, 1200, 800);
 }
 
-
-
-void Update_Timer() {
+void Update_Timer(int *seconde, int *minute){
     snprintf(timer, 6, "%02d:%02d", minute, seconde);
     ChoisirCouleurDessin(CouleurParComposante(0, 0, 0));
     RemplirRectangle(10, 720, 100, 800);  
@@ -75,7 +42,7 @@ void Update_Timer() {
     EcrireTexte(10, 760, timer, 2);
 }
 
-void Score() {
+void Score(int *segment, int pos_x[], int pos_y[], int pommex[], int pommey[], int *go_on){
     Nbr = (segment - 10) * 25;
     snprintf(score, 4, "%04d0", Nbr);
     ChoisirCouleurDessin(CouleurParComposante(0, 0, 0));
@@ -84,8 +51,7 @@ void Score() {
     EcrireTexte(1100, 760, score, 2);
 }
 
-
-void Update_Serpent(){
+void Update_Serpent(int segment, int pos_x[], int pos_y[], int old_x[], int old_y[], int fond){
     AfficherSprite(fond, pos_x[segment-1], pos_y[segment-1]); 
     AfficherSprite(serpent, pos_x[0], pos_y[0]);
     for (i=1 ; i<segment ; i++){
@@ -102,18 +68,14 @@ void Update_Serpent(){
 
 }
 
-
-
-void Terrain(){
+void Terrain(int pos_x[], int pos_y[], int *go_on){
     if (pos_x[0] >1160 || pos_x[0]<=0)
         go_on=0;
     if (pos_y[0]<20 || pos_y[0] >=700)
         go_on=0;
     
 }
-
-
-void Timer(){
+void Timer(unsigned long int *suivant, int *old_seconde, int *x, int *y, int *direction, int pos_x[], int pos_y[], int old_x[], int old_y[], int fond, int serpent, int pomme, int pommex[], int pommey[]){
     if(Microsecondes()> suivant){
         suivant = Microsecondes()+CYCLE;
         seconde_actuel = (suivant/1000000)%10;
@@ -130,8 +92,7 @@ void Timer(){
         }
     }
 }
-
-void Controle(void) {
+void Controle(int *direction, int *go_on, int *paused){
     while (ToucheEnAttente()) {
         t = Touche();
         switch (t) {
@@ -158,14 +119,15 @@ void Controle(void) {
     }
 }
 
-void Attendre(int microsecondes) {
+
+void Attendre(int microsecondes){
     unsigned long int attente = Microsecondes() + microsecondes;
     while (Microsecondes() < attente) {
         
     }
 }
 
-void Serpent(void) {
+void Serpent(int direction, int pos_x[], int pos_y[], int old_x[], int old_y[], int pommex[], int pommey[], int *segment, int fond){
     if (direction == 1){
         pos_y[0]=old_y[0]-20;
     }
@@ -191,7 +153,7 @@ void Serpent(void) {
     Attendre(100000);
 
 }
-void Collision(void) {
+void Collision(int pos_x[], int pos_y[], int *go_on, int segment){
     for (i = 1; i < segment; i++) {
         if (pos_x[0] == pos_x[i] && pos_y[0] == pos_y[i]) {
             go_on = 0;  
@@ -199,38 +161,56 @@ void Collision(void) {
         }
     }
 }
-
-void Pomme(){
+void Pomme(int pomme, int pommex[], int pommey[]){
 
     for(pp = 0; pp < 5; ++pp){
         AfficherSprite(pomme, pommex[pp], pommey[pp]);
     }
 }
 
-int main(){
-
+int main() {
     InitialiserGraphique();
-    CreerFenetre(350,100,1200,800);
-    EffacerEcran(CouleurParComposante(0,0,0));
-    suivant = Microsecondes()+CYCLE;
-    old_seconde=(suivant/1000000)%10;
-    DessinerScene();
+    CreerFenetre(350, 100, 1200, 800);
+    EffacerEcran(CouleurParComposante(0, 0, 0));
+
+    unsigned long int suivant = Microsecondes() + CYCLE;
+    int old_seconde = (suivant / 1000000) % 10;
+    int go_on = 1;
+    int serpent = ChargerSprite("serpent.png");
+    int x = 600;
+    int y = 400;
+    int direction = 4;
+    int t;
+    int paused = 0;
+
+    int segment = 10;
+    int pos_x[60];
+    int pos_y[60];
+    int old_x[60];
+    int old_y[60];
+
+    srand(time(NULL));
+    int pomme = ChargerSprite("pomme.png");
+    int pommex[5];
+    int pommey[5];
+
+    int fond = ChargerSprite("fond.png");
+
+    DessinerScene(x, y, direction, serpent, segment, pos_x, pos_y, old_x, old_y, pomme, pommex, pommey, fond);
 
     while (go_on) {
-        Controle();
+        Controle(&direction, &go_on, &paused);
 
         if (!paused) {
-            Timer();
-            Serpent();
-            Pomme();
-            Collision();
-            Score();
+            Timer(&suivant, &old_seconde, &x, &y, &direction, pos_x, pos_y, old_x, old_y, fond, serpent, pomme, pommex, pommey);
+            Serpent(direction, pos_x, pos_y, old_x, old_y, pommex, pommey, &segment, fond);
+            Pomme(pomme, pommex, pommey);
+            Collision(pos_x, pos_y, &go_on, segment);
+            Score(&segment, pos_x, pos_y, pommex, pommey, &go_on);
         }
-
     }
 
-
-    
     FermerGraphique();
     return EXIT_SUCCESS;
 }
+
