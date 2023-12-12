@@ -56,7 +56,7 @@ void DessinerScene() {
     srand(time(NULL));
     pomme = ChargerSprite("pomme.png");
     for (p = 0; p < 5; p++) {
-        pommex[p] = ((rand() % (56) + 1) * 20);
+        pommex[p] = ((rand() % (57) + 1) * 20);
         pommey[p] = ((rand() % (33) + 1) * 20);
         AfficherSprite(pomme, pommex[p], pommey[p]);
     }
