@@ -1,172 +1,79 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <graph.h>
-#include <time.h>
-#include <unistd.h>
-#include "jeu.h"
-
-#define CYCLE 10000L
+#include "serpent.h"
+#include "structure.h"
+#include "jeux.h"; //ne pas oublier d'include "jeux.h"
 
 
-int seconde = 0;
-int minute = 0;
-int seconde_actuel = 0;
-int old_seconde = 0;
-char timer[6];
-unsigned long int suivant;
+void ConditionDefaite(JEU jeu, TERRAIN terrain, SERPENT serpent) {
+    int i = 0;
+    int serpent;
+    if (terrain.pos_x[0] > 1140 || terrain.pos_x[0] <= 20)
+        jeu.jeu_en_cours = 0;
+    if (terrain.pos_y[0] < 40 || terrain.pos_y[0] >= 680)
+        jeu.jeu_en_cours = 0;
 
-int go_on = 1;
-
-int serpent;
-int x = 600;
-int y = 400;
-int direction = 4;
-int t;
-
-int segment = 10;
-int i = 0;
-int pos_x[60];
-int pos_y[60];
-int old_x[60];
-int old_y[60];
-
-int p = 0;
-int pp = 0;
-int pomme, pommex[5], pommey[5];
-int fond;
-
-
-
-void DessinerScene() {
-   snprintf(timer,6,"%02d:%02d", minute ,seconde);
-    ChoisirCouleurDessin(CouleurParComposante(91,222,122));
-    RemplirRectangle(20,20,1160,700);
-    ChoisirCouleurDessin(CouleurParComposante(255,255,255)); 
-    EcrireTexte(10,760,timer,2);
-    serpent=ChargerSprite("serpent.png");
-    fond = ChargerSprite("fond.png");
-
-    for (i = 0; i < segment; i++){
-        AfficherSprite(serpent, x-(i*20), y);
-        pos_x[i]=x-(i*20);
-        pos_y[i]=y;
-        old_x[i]=pos_x[i];
-        old_y[i]=pos_y[i];
-    }
-    srand(time(NULL));
-    pomme=ChargerSprite("pomme.png");
-    for (p = 0; p < 5; p++) {
-        pommex[p] = ((rand() % (58)+1)*20);
-        pommey[p] = ((rand() % (35)+1)*20);
-        AfficherSprite(pomme, pommex[p],pommey[p]);
+    for (i = 1; i < serpent.serpent; i++) {
+        if (terrain.pos_x[0] == terrain.pos_x[i] && terrain.pos_y[0] == terrain.pos_y[i])
+            jeu.jeu_en_cours = 0;
     }
 }
+void Controle(JEU jeu) {
+    jeu.direction = 0;
+    jeu.last_direction = 0;
+    jeu.jeu_en_cours = 1;
+    jeu.touche;
 
-void Update_Timer() {
-    snprintf(timer,6,"%02d:%02d", minute, seconde);
-    ChoisirCouleurDessin(CouleurParComposante(0,0,0));
-    RemplirRectangle(0,700,1200,800);
-    ChoisirCouleurDessin(CouleurParComposante(255,255,255));
-    EcrireTexte(10,760,timer,2);
-}
-
-void Update_Serpent() {
-   AfficherSprite(fond, pos_x[segment-1], pos_y[segment-1]);
-    AfficherSprite(serpent, pos_x[0], pos_y[0]);
-    for (i=1 ; i<segment ; i++){
-        pos_x[i]=old_x[i-1];
-        pos_y[i]=old_y[i-1];
-        AfficherSprite(serpent, pos_x[i], pos_y[i]);
-    }
-    old_x[0]=pos_x[0];
-    old_y[0]=pos_y[0];
-    for (i=1 ; i<segment ; i++){
-        old_x[i]=pos_x[i];
-        old_y[i]=pos_y[i];
-    }
-}
-
-void Terrain() {
-   if (pos_x[0] >1140 || pos_x[0]<=20)
-        go_on=0;
-    if (pos_y[0]<40 || pos_y[0] >=680)
-        go_on=0;
-    
-}
-
-void Timer() {
-   if(Microsecondes()> suivant){
-        suivant = Microsecondes()+CYCLE;
-        seconde_actuel = (suivant/1000000)%10;
-        if(seconde_actuel !=old_seconde){
-            old_seconde = seconde_actuel;
-            if(seconde == 59){
-                minute=minute+1;
-                seconde=0;
-                Update_Timer();
-            }else;{
-                seconde = seconde+1;
-                Update_Timer();
-            }
-        }
-    }
-}
-
-void Controle() {
-    while(ToucheEnAttente()){
-        t = Touche();
-        switch(t){
-            case XK_Left :
-                direction=3;
-                break;
-            case XK_Right :
-                direction=4;
-                break;
-            case XK_Up :
-                direction=1;
-                break;
+    while (ToucheEnAttente()) {
+        jeu.touche = Touche();
+        switch (jeu.touche) {
+            case XK_Left:
+                if (jeu.last_direction != 4) {
+                    jeu.direction = 3;
+                    jeu.last_direction = 3;
+                }
+                return;
+            case XK_Right:
+                if (jeu.last_direction != 3) {
+                    jeu.direction = 4;
+                    jeu.last_direction = 4;
+                }
+                return;
+            case XK_Up:
+                if ( jeu.last_direction != 2) {
+                        jeu.direction = 1;
+                        jeu.last_direction = 1;
+                }
+                return;
             case XK_Down:
-                direction=2;
-                go_on=2;
-                break;
+                if ( jeu.last_direction != 1) {
+                        jeu.direction = 2;
+                        jeu.last_direction = 2;
+                    }
+                return;
             case XK_Escape:
-                direction=0;
-                break;
-            case XK_p :
-                direction=0;
+                    jeu.direction = 0;
+                    jeu.jeu_en_cours = 0;
+                return;
+            case XK_p:
+                    jeu.direction = 0;
         }
     }
 }
 
-void Serpent() {
-     if (direction == 1){
-        pos_y[0]=old_y[0]-20;
+void Attendre(int microsecondes) {
+    unsigned long int attente = Microsecondes() + microsecondes;
+    while (Microsecondes() < attente) {
     }
-    if (direction == 2) {
-        pos_y[0]=old_y[0]+20;
-    }
-    if (direction == 3) {
-        pos_x[0]=old_x[0]-20;
-    }
-    if (direction == 4) {
-        pos_x[0]=old_x[0]+20;
-   }
-
-    for(p=0; p<5; p++){
-        if(pommex[p]==pos_x[0] && pommey[p]==pos_y[0]){
-            segment+=2;
-            pommex[p] = ((rand() % (58)+1)*20);
-            pommey[p] = ((rand() % (35)+1)*20);
-        }
-    }
-
-Update_Serpent();
-Terrain();
-usleep(100000);
 }
 
-void Pomme() {
-    for(pp = 0; pp < 5; ++pp){
-        AfficherSprite(pomme, pommex[pp], pommey[pp]);
-    }
+void Update_Score(JEU jeu) {
+    int score = 0;
+    ChoisirCouleurDessin(CouleurParComposante(0, 0, 0));
+    RemplirRectangle(1000, 700, 1200, 800);
+    char score_str[10];
+    snprintf(score_str, 10, "SCORE: %d", score);
+    ChoisirCouleurDessin(CouleurParComposante(255, 255, 255));
+    EcrireTexte(1000, 760, score_str, 2);
 }
