@@ -1,7 +1,11 @@
 #include <stdlib.h>
 #include <graph.h>
 #include "serpent.h"
+<<<<<<< HEAD
 #include "structures.h"
+=======
+#include "structure.h"
+>>>>>>> refs/remotes/origin/master
 
 
 

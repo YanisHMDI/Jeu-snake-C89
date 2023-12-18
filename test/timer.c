@@ -1,10 +1,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <graph.h>
+<<<<<<< HEAD
 #include "structures.h"
 
 
 #define DELTA 1000000 
+=======
+#include "structure.h";
+#include "timer.h";
+
+#define DELTA 1000000 // Remplacez 1000000 par la valeur appropriée en microsecondes
+>>>>>>> refs/remotes/origin/master
 
 
 void Update_Timer(unsigned long int debut_timer) {

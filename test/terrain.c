@@ -1,17 +1,30 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <graph.h>
+<<<<<<< HEAD
 #include "structures.h"
 #include "terrain.h"
+=======
+#include "structure.h"
+#include "terrain.h";
+>>>>>>> refs/remotes/origin/master
 
 #define TAILLE_INITIALE_SERPENT 10
 
 
+<<<<<<< HEAD
 void DessinerScene(TIMER temps, TERRAIN terrain, SERPENT snake){
     temps.seconde = 0; 
     temps.minute= 0 ;
     temps.timer[6];
     
+=======
+void DessinerScene_v2(TIMER temps, TERRAIN terrain, SERPENT snake){
+    temps.seconde = 0; 
+    temps.minute= 0 ;
+    temps.timer[6];
+    //int serpent;
+>>>>>>> refs/remotes/origin/master
     
     int x = 600;
     int y = 400;
