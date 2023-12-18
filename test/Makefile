@@ -1,0 +1,23 @@
+serpent: main.o serpent.o timer.o terrain.o pastilles.o jeu.o
+	gcc -o serpent main.o serpent.o timer.o terrain.o pastilles.o jeu.o -ansi -lgraph
+
+main.o: main.c serpent.h timer.h structures.h
+	gcc -c main.c -ansi -lgraph
+
+serpent.o: serpent.c serpent.h structures.h
+	gcc -c serpent.c -ansi -lgraph
+
+timer.o: timer.c timer.h serpent.h structures.h
+	gcc -c timer.c -ansi -lgraph
+
+pastilles.o: pastilles.c pastilles.h serpent.h structures.h
+	gcc -c pastilles.c -ansi -lgraph
+
+terrain.o: terrain.c terrain.h serpent.h structures.h
+	gcc -c terrain.c -ansi -lgraph
+
+jeu.o: jeu.c jeu.h structures.h
+	gcc -c jeu.c -ansi -lgraph
+
+clean:
+	rm -f *.o serpent
