@@ -1,141 +1,60 @@
-<<<<<<< HEAD
-#include "serpent.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <graph.h>
 #include "jeu.h"
+#include "serpent.h"
 #include "structures.h"
 
 
 
+void Serpent(SERPENT *snake, TERRAIN *terrain, JEU *jeu, PASTILLE *pill) {
 
-void Serpent(JEU *jeu) {
-    int score = 0;
-=======
-#include <stdlib.h>
-#include <stdio.h>
-#include <graph.h>
-#include "serpent.h"
-#include "jeux.h"
-#include "structure.h"
-#include <X11/Xlib.h>
-
-void Update_Serpent(void){
-    int fond;
-    int serpent;
-    int segment = 10;
-
-    int i;
-
-    int pos_x[60];
-    int pos_y[60];
-    int old_x[60];
-    int old_y[60];
-
-    AfficherSprite(fond, pos_x[segment-1], pos_y[segment-1]);
-    AfficherSprite(serpent, pos_x[0], pos_y[0]);
-    for (i=1 ; i<segment ; i++){
-        pos_x[i]=old_x[i-1];
-        pos_y[i]=old_y[i-1];
-        AfficherSprite(serpent, pos_x[i], pos_y[i]);
+    if (jeu->direction == 1 && jeu->direction != 2 ){
+        snake->pos_y[0]=snake->old_y[0]-20;
     }
-    old_x[0]=pos_x[0];
-    old_y[0]=pos_y[0];
-    for (i=1 ; i<segment ; i++){
-        old_x[i]=pos_x[i];
-        old_y[i]=pos_y[i];
+    if (jeu->direction == 2 && jeu->direction !=  1) {
+        snake->pos_y[0]=snake->old_y[0]+20;
     }
+    if (jeu->direction == 3 && jeu->direction != 4) {
+        snake->pos_x[0]=snake->old_x[0]-20;
+    }
+    if (jeu->direction == 4 && jeu->direction != 3) {
+        snake->pos_x[0]=snake->old_x[0]+20;
+   }
 
-}
-
-
-void Serpent(void) {
-    int score = 0 ;
->>>>>>> refs/remotes/origin/master
-    int i = 0;
-    int segment = 10;
-    int direction = 4;
-
-    int p = 0;
-
-    int pos_x[60];
-    int pos_y[60];
-    int old_x[60];
-    int old_y[60];
-
-    int pastillex[5], pastilley[5];
-
-<<<<<<< HEAD
-    
-    ConditionDefaite(jeu, &(jeu->terrain), &(jeu->snake));;
-    for (p = 0; p < 5; p++) {
-        if (pastillex[p] == pos_x[0] && pastilley[p] == pos_y[0]) {
-            segment += 2;
-            pastillex[p] = ((rand() % (57) + 1) * 20);
-            pastilley[p] = ((rand() % (34) + 1) * 20);
-            score += 5;
+    for(pill->p=0; pill->p<5; pill->p++){
+        if(pill->pastillex[pill->p]==snake->pos_x[0] && pill->pastilley[pill->p]==snake->pos_y[0]){
+            snake->segment+=2;
+            pill->pastillex[pill->p] = ((rand() % (57)+1)*20);
+            pill->pastilley[pill->p] = ((rand() % (34)+1)*20);
+            jeu->score += 5;
             Update_Score(jeu);
         }
     }
-    ConditionDefaite(jeu, &(jeu->terrain), &(jeu->snake));
-    Update_Serpent();
+
+    Update_Serpent(snake,terrain);
+    ConditionDefaite(jeu,terrain,snake);
     Attendre(100000);
+
 }
 
-void Update_Serpent(void) {
-    int fond;
-    int serpent;
-    int segment = 10;
 
+
+void Update_Serpent(SERPENT *snake, TERRAIN *terrain){
     int i;
 
-    int pos_x[60];
-    int pos_y[60];
-    int old_x[60];
-    int old_y[60];
-
-    
-    AfficherSprite(fond, pos_x[segment-1], pos_y[segment-1]);
-    AfficherSprite(serpent, pos_x[0], pos_y[0]);
-
-    for (i = 1; i < segment; i++) {
-        pos_x[i] = old_x[i - 1];
-        pos_y[i] = old_y[i - 1];
-        AfficherSprite(serpent, pos_x[i], pos_y[i]);
+    AfficherSprite(terrain->fond, snake->pos_x[snake->segment-1], snake->pos_y[snake->segment-1]);
+    AfficherSprite(snake->serpent, snake->pos_x[0], snake->pos_y[0]);
+    for (i=1 ; i<snake->segment ; i++){
+        snake->pos_x[i]=snake->old_x[i-1];
+        snake->pos_y[i]=snake->old_y[i-1];
+        AfficherSprite(snake->serpent, snake->pos_x[i], snake->pos_y[i]);
+    }
+    snake->old_x[0]=snake->pos_x[0];
+    snake->old_y[0]=snake->pos_y[0];
+    for (i=1 ; i<snake->segment ; i++){
+        snake->old_x[i]=snake->pos_x[i];
+        snake->old_y[i]=snake->pos_y[i];
     }
 
-    old_x[0] = pos_x[0];
-    old_y[0] = pos_y[0];
-
-    for (i = 1; i < segment; i++) {
-        old_x[i] = pos_x[i];
-        old_y[i] = pos_y[i];
-    }
 }
-
-=======
-    if (direction == 1 && direction != 2 ){
-        pos_y[0]=old_y[0]-20;
-    }
-    if (direction == 2 && direction !=  1) {
-        pos_y[0]=old_y[0]+20;
-    }
-    if (direction == 3 & direction != 4) {
-        pos_x[0]=old_x[0]-20;
-    }
-    if (direction == 4 && direction != 3) {
-        pos_x[0]=old_x[0]+20;
-   }
-
-    for(p=0; p<5; p++){
-        if(pastillex[p]==pos_x[0] && pastilley[p]==pos_y[0]){
-            segment+=2;
-            pastillex[p] = ((rand() % (65)+1)*20);
-            pastilley[p] = ((rand() % (20)+1)*20);
-            score += 5;
-            Update_Score();             //
-        }
-    }
-
-    Update_Serpent();       // erreur -> vous ne pouvez pas utiliser une fonction qui n'est pas encore créer, je la met donc avant 
-    ConditionDefaite();     // pareil, prototype : void ConditionDefaite(JEU jeu, TERRAIN terrain, SERPENT serpent);
-    Attendre(100000);
-}
->>>>>>> refs/remotes/origin/master

@@ -1,32 +1,35 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <graph.h>
-<<<<<<< HEAD
+#include "serpent.h"
+#include "timer.h"
 #include "structures.h"
+#define CYCLE 10000L
 
 
-#define DELTA 1000000 
-=======
-#include "structure.h";
-#include "timer.h";
 
-#define DELTA 1000000 // Remplacez 1000000 par la valeur appropriée en microsecondes
->>>>>>> refs/remotes/origin/master
-
-
-void Update_Timer(unsigned long int debut_timer) {
-    int secondes = ((Microsecondes() - debut_timer) / DELTA);
-	int minutes = 0;
-    char timer_text[6];
-		
-	while (secondes >= 60) {
-		minutes += 1;
-		secondes -= 60;
-	}
-
-    snprintf(timer_text, 6, "%02d:%02d", minutes, secondes);
-    ChoisirCouleurDessin(CouleurParComposante(0, 0, 0));
-    RemplirRectangle(10, 720, 100, 800);  
+void Update_Timer(TIMER *temps){
+    snprintf(temps->timer, 6, "%02d:%02d", temps->minute, temps->seconde);
+    ChoisirCouleurDessin(CouleurParComposante(0,0,0));
+    RemplirRectangle(0, 700, 400, 800);
     ChoisirCouleurDessin(CouleurParComposante(255, 255, 255));
-    EcrireTexte(10, 760, timer_text, 2);
+    EcrireTexte(10, 760, temps->timer, 2);
+}
+
+void Timer(TIMER *temps) { 
+    if (Microsecondes() > temps->suivant) {
+        temps->suivant = Microsecondes() + CYCLE;
+        temps->seconde_actuel = (temps->suivant / 1000000) % 10;
+        if (temps->seconde_actuel != temps->old_seconde) {
+            temps->old_seconde = temps->seconde_actuel;
+            if (temps->seconde == 59) {
+                temps->minute += 1;
+                temps->seconde = 0;
+                Update_Timer(temps);
+            } else {
+                temps->seconde = temps->seconde + 1;
+                Update_Timer(temps); 
+            }
+        }
+    }
 }

@@ -1,23 +1,21 @@
-serpent: main.o serpent.o timer.o terrain.o pastilles.o jeu.o
-	gcc -o serpent main.o serpent.o timer.o terrain.o pastilles.o jeu.o -ansi -lgraph
+# Compiler and flags
+CC = gcc
+CFLAGS = -ansi -pedantic
+LIBS = -lgraph
 
-main.o: main.c serpent.h timer.h structures.h
-	gcc -c main.c -ansi -lgraph
+# Executable and source files
+TARGET = serpent
+SRCS = main.c serpent.c timer.c terrain.c pastilles.c jeu.c
+OBJS = $(SRCS:.c=.o)
 
-serpent.o: serpent.c serpent.h structures.h
-	gcc -c serpent.c -ansi -lgraph
+# Rules
+all: $(TARGET)
 
-timer.o: timer.c timer.h serpent.h structures.h
-	gcc -c timer.c -ansi -lgraph
+$(TARGET): $(OBJS)
+	$(CC) -o $@ $^ $(LIBS)
 
-pastilles.o: pastilles.c pastilles.h serpent.h structures.h
-	gcc -c pastilles.c -ansi -lgraph
-
-terrain.o: terrain.c terrain.h serpent.h structures.h
-	gcc -c terrain.c -ansi -lgraph
-
-jeu.o: jeu.c jeu.h structures.h
-	gcc -c jeu.c -ansi -lgraph
+%.o: %.c
+	$(CC) -c $< $(CFLAGS) $(LIBS)
 
 clean:
-	rm -f *.o serpent
+	rm -f $(OBJS) $(TARGET)

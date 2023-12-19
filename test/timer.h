@@ -1,12 +1,11 @@
-#ifndef TIMER_H
-#define TIMER_H
+#ifndef JEU_H
+#define JEU_H
 
-<<<<<<< HEAD
+#include "structures.h"
 
-=======
-//jai pas trouve c fonctions
-void Timer();
->>>>>>> refs/remotes/origin/master
-void Update_Timer();
+void Controle(JEU *jeu);
+void ConditionDefaite(JEU *jeu, TERRAIN *terrain, SERPENT *snake);
+void Update_Score(JEU *jeu);
+void Attendre(int microsecondes);
 
 #endif

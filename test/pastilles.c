@@ -1,21 +1,13 @@
 #include <stdlib.h>
 #include <graph.h>
 #include "serpent.h"
-<<<<<<< HEAD
 #include "structures.h"
-=======
-#include "structure.h"
->>>>>>> refs/remotes/origin/master
 
 
-
-/*  void Pastille(pill) --> il faut indiquer le type de "pill" en parametres, 
-    de plus, vous le passez en parametre mais vous ne l'utilisez pas dans la fonction donc void Pastille(void)
-*/
-void Pastille(void) {
+void Pastille(PASTILLE *pill) {
     int pp;
-    int pastille, pastillex[5], pastilley[5];
     for (pp = 0; pp < 5; ++pp) {
-        AfficherSprite(pastille, pastillex[pp], pastilley[pp]);
+        AfficherSprite(pill->pastille, pill->pastillex[pp], pill->pastilley[pp]);
     }
 }
+

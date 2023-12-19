@@ -1,6 +1,7 @@
 #ifndef PASTILLE_H
 #define PASTILLE_H
 
-void Pastille(void) ;
+#include "structures.h"
+void Pastille(PASTILLE *pill) ;
 
 #endif 
