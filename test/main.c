@@ -58,21 +58,17 @@ int main() {
     RemplirRectangle(0, 0, 20, 20);
 
     while (jeu.jeu_en_cours) {
-        Timer(&temps);
-        Update_Timer(&temps);
         Controle(&jeu);
-        Serpent(&snake, &terrain, &jeu, &pill);
-        Pastille(&pill);
-        Update_Score(&jeu);
+        if(jeu.paused == 0){
+            Timer(&temps);
+            Update_Timer(&temps);
+            Serpent(&snake, &terrain, &jeu, &pill);
+            Pastille(&pill);
+            Update_Score(&jeu);
+        }
 
     }
     
-
-
-
-    FermerGraphique();
-    return EXIT_SUCCESS;
-}
 /*while (jeu.jeu_en_cours) {
         Controle();
 
@@ -87,4 +83,9 @@ int main() {
 
         AttenteProchainePeriode();
         suivant += CYCLE;
-    }*/
+}*/
+
+
+    FermerGraphique();
+    return EXIT_SUCCESS;
+}

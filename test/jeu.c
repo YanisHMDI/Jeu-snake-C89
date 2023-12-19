@@ -30,30 +30,33 @@ void Controle(JEU *jeu) {
                     jeu->direction = 3;
                     jeu->last_direction = 3;
                 }
-                return;
+                break;
             case XK_Right:
                 if (jeu->last_direction != 3) {
                     jeu->direction = 4;
                     jeu->last_direction = 4;
                 }
-                return;
+                break;
             case XK_Up:
                 if ( jeu->last_direction != 2) {
                      jeu->direction = 1;
                      jeu->last_direction = 1;
                 }
-                return;
+                break;
             case XK_Down:
                 if ( jeu->last_direction != 1) {
                      jeu->direction = 2;
                     jeu->last_direction = 2;
                 }
-                return;
+                break;
             case XK_Escape:
                  jeu->direction = 0;
                  jeu->jeu_en_cours = 0;
-                
+                 break;
 
+            case XK_space:
+                jeu->paused = jeu->paused == 1 ? 0 : 1; 
+                break;
     }
 }
 }
