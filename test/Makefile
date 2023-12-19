@@ -1,14 +1,14 @@
-# Compiler and flags
+
 CC = gcc
 CFLAGS = -ansi -pedantic
 LIBS = -lgraph
 
-# Executable and source files
+
 TARGET = serpent
 SRCS = main.c serpent.c timer.c terrain.c pastilles.c jeu.c
 OBJS = $(SRCS:.c=.o)
 
-# Rules
+
 all: $(TARGET)
 
 $(TARGET): $(OBJS)

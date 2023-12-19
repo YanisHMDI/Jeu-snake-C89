@@ -16,7 +16,6 @@ int main() {
     SERPENT snake;
     TIMER temps;
     PASTILLE pill;
-    jeu.paused = 0;
     
     jeu.direction = 4;
     jeu.jeu_en_cours = 1;
@@ -58,30 +57,22 @@ int main() {
     RemplirRectangle(0, 700, 1200, 800);
     RemplirRectangle(0, 0, 20, 20);
 
-    
-    
-while (jeu.jeu_en_cours) {
-    if (!jeu.paused) {
+    while (jeu.jeu_en_cours) {
         Timer(&temps);
         Update_Timer(&temps);
         Controle(&jeu);
         Serpent(&snake, &terrain, &jeu, &pill);
         Pastille(&pill);
         Update_Score(&jeu);
-    } else {
-        Controle(&jeu);  
+
     }
-
-    Attendre(100000);
-}
-
+    
 
 
 
     FermerGraphique();
     return EXIT_SUCCESS;
 }
-
 /*while (jeu.jeu_en_cours) {
         Controle();
 

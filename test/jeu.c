@@ -53,10 +53,7 @@ void Controle(JEU *jeu) {
                  jeu->direction = 0;
                  jeu->jeu_en_cours = 0;
                 
-            case XK_p:
-                jeu->direction = 0;
-                jeu->paused = !jeu->paused; // Inverse l'état de la pause
-                break;
+
     }
 }
 }
