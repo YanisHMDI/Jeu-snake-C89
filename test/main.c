@@ -63,7 +63,7 @@ int lancer_jeu() {
             Update_Score(&jeu);
         }
     }
-    FermerGraphique();
+    
 }
 
 int main() {
@@ -80,6 +80,7 @@ int main() {
         printf("Aucune option sélectionnée.\n");
     }
 
+    /*les free sont la omg */
     FermerGraphique();
     return EXIT_SUCCESS;
 }

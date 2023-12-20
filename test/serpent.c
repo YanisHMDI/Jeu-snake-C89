@@ -27,7 +27,7 @@ void Serpent(SERPENT *snake, TERRAIN *terrain, JEU *jeu, PASTILLE *pill) {
             snake->segment+=2;
             pill->pastillex[pill->p] = ((rand() % (57)+1)*20);
             pill->pastilley[pill->p] = ((rand() % (34)+1)*20);
-            jeu->score += 50;
+            jeu->score += 5;
             Update_Score(jeu);
         }
     }
