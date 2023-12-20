@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <graph.h>
 
-#include "structures.h"
+#include "../include/structures.h"
 #define TAILLE_INITIALE_SERPENT 10
 
 
@@ -13,8 +13,8 @@ void DessinerScene(TIMER *temps, TERRAIN *terrain, SERPENT *snake, PASTILLE *pil
     RemplirRectangle(20,20,1160,700);
     ChoisirCouleurDessin(CouleurParComposante(255,255,255)); 
     EcrireTexte(10,760,temps->timer,2);
-    snake->serpent = ChargerSprite("serpent.png");
-    terrain->fond = ChargerSprite("fond.png");
+    snake->serpent = ChargerSprite("image/serpent.png");
+    terrain->fond = ChargerSprite("image/fond.png");
 
     for (i = 0; i < TAILLE_INITIALE_SERPENT; i++){
         AfficherSprite(snake->serpent, terrain->x-(i*10), terrain->y);
@@ -24,7 +24,7 @@ void DessinerScene(TIMER *temps, TERRAIN *terrain, SERPENT *snake, PASTILLE *pil
         snake->old_y[i]=snake->pos_y[i];
     }
     srand(time(NULL));
-    pill->pastille=ChargerSprite("pomme.png");
+    pill->pastille=ChargerSprite("image/pomme.png");
     for (pill->p = 0; pill->p < 5; pill->p++) {
         pill->pastillex[pill->p] = ((rand() % (57)+1)*20);
         pill->pastilley[pill->p] = ((rand() % (34)+1)*20);

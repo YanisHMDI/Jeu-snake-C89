@@ -1,13 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <graph.h>
-#include "serpent.h"
-#include "pastilles.h"
-#include "terrain.h"
-#include "jeu.h"
-#include "structures.h"
-#include "menu.h"
-#include "timer.h"
+#include "../include/serpent.h"
+#include "../include/pastilles.h"
+#include "../include/terrain.h"
+#include "../include/jeu.h"
+#include "../include/structures.h"
+#include "../include/menu.h"
+#include "../include/timer.h"
 
 
 #define CYCLE 10000L

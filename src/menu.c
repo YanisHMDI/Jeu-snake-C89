@@ -1,7 +1,7 @@
 #include <graph.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "menu.h"
+#include "../include/menu.h"
 
 typedef struct {
     int x, y, L, H;
@@ -13,7 +13,7 @@ int check_zone(Zone z, int x, int y) {
 
 int afficher_menu(int *choix) {
     Zone boutonJouer = {741, 371, 184, 72};
-    ChargerImageFond("menu.png");
+    ChargerImageFond("image/menu.png");
 
     while (1) {
         SourisPosition();

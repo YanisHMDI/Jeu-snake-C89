@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <graph.h>
-#include "serpent.h"
-#include "structures.h"
+#include "../include/serpent.h"
+#include "../include/structures.h"
 
 
 void Pastille(PASTILLE *pill) {

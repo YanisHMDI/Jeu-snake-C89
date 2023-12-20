@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <graph.h>
-#include "jeu.h"
-#include "serpent.h"
-#include "structures.h"
+#include "../include/jeu.h"
+#include "../include/serpent.h"
+#include "../include/structures.h"
 
 
 

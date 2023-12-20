@@ -30,8 +30,8 @@ void DessinerScene(Serpent *spr) {
     ChoisirCouleurDessin(CouleurParComposante(128, 255, 0));
     RemplirRectangle(20, 20, 1160, 700);
     ChoisirCouleurDessin(CouleurParComposante(255, 255, 255));
-    spr->sprite = ChargerSprite("serpent.png");
-    int fond = ChargerSprite("fond.png");
+    spr->sprite = ChargerSprite("../image/serpent.png");
+    int fond = ChargerSprite("../image/fond.png");
 
     for (i = 0; i < SEGMENT; i++) {
         AfficherSprite(spr->sprite, spr->x - (i * 20), spr->y);
@@ -42,7 +42,7 @@ void DessinerScene(Serpent *spr) {
     }
 
     srand(time(NULL));
-    pomme = ChargerSprite("pomme.png");
+    pomme = ChargerSprite("../image/pomme.png");
     for (i = 0; i < 5; i++) {
         pommex[i] = ((rand() % (57) + 1) * 20);
         pommey[i] = ((rand() % (34) + 1) * 20);
