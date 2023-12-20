@@ -2,6 +2,9 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "stdio.h": "c",
-        "graph.h": "c"
+        "graph.h": "c",
+        "structures.h": "c",
+        "main.h": "c",
+        "stdlib.h": "c"
     }
 }

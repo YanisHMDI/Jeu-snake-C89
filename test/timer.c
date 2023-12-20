@@ -4,6 +4,7 @@
 #include "serpent.h"
 #include "timer.h"
 #include "structures.h"
+#include "jeu.h"
 #define CYCLE 10000L
 
 

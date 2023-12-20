@@ -27,6 +27,7 @@ struct Jeu_s{
     int score;
     int touche;
     int paused;
+    int niveau;  
 };
 
 typedef struct Jeu_s JEU;
@@ -50,5 +51,9 @@ struct Pastille_s{
 };
 
 typedef struct Pastille_s PASTILLE;
+
+typedef struct  {
+    int x, y, L, H;
+}zone;
 
 #endif

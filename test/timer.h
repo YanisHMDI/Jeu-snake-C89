@@ -1,11 +1,9 @@
-#ifndef JEU_H
-#define JEU_H
+#ifndef TIMER_H
+#define TIMER_H
 
 #include "structures.h"
 
-void Controle(JEU *jeu);
-void ConditionDefaite(JEU *jeu, TERRAIN *terrain, SERPENT *snake);
-void Update_Score(JEU *jeu);
-void Attendre(int microsecondes);
+void Timer(TIMER *temps);
+void Update_Timer(TIMER *temps);
 
 #endif

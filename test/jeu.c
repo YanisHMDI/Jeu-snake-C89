@@ -4,10 +4,14 @@
 #include "jeu.h"
 #include "serpent.h"
 #include "structures.h"
+#define CYCLE 10000L
+#define TAILLE_INITIALE_SERPENT 10
+
+
 
 
 void ConditionDefaite(JEU *jeu, TERRAIN *terrain, SERPENT *snake) {
-    int i = 0;
+int i = 0;
     if (snake->pos_x[0] > 1180 || snake->pos_x[0] < 20){
         jeu->jeu_en_cours = 0;
     }
@@ -19,7 +23,6 @@ void ConditionDefaite(JEU *jeu, TERRAIN *terrain, SERPENT *snake) {
         jeu->jeu_en_cours = 0;
     }
 }
-
 void Controle(JEU *jeu) {
     int pause = 1;
     while (ToucheEnAttente()) {
@@ -68,12 +71,14 @@ void Attendre(int microsecondes) {
 }
 
 void Update_Score(JEU *jeu) {
-    char score_str[10];
-    snprintf(score_str, 10, "Score: %d", jeu->score);
+    char score_str[100];
+    snprintf(score_str, 100, "Score: %d", jeu->score);
     ChoisirCouleurDessin(CouleurParComposante(0, 0, 0));
-    RemplirRectangle(0, 0, 20, 20);
     RemplirRectangle(1000, 700, 1100, 800);
     ChoisirCouleurDessin(CouleurParComposante(255, 255, 255));
     EcrireTexte(1000, 760, score_str, 2);
    
 }
+
+
+
