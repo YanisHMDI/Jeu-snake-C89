@@ -18,7 +18,7 @@ void DessinerScene(TIMER *temps, TERRAIN *terrain, SERPENT *snake, PASTILLE *pil
 
     for (i = 0; i < TAILLE_INITIALE_SERPENT; i++){
         AfficherSprite(snake->serpent, terrain->x-(i*10), terrain->y);
-        snake->pos_x[i]=terrain->x-(i*20);
+        snake->pos_x[i]=terrain->x-(i*10);
         snake->pos_y[i]=terrain->y;
         snake->old_x[i]=snake->pos_x[i];
         snake->old_y[i]=snake->pos_y[i];

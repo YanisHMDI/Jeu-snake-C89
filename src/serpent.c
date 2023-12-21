@@ -22,7 +22,7 @@ void Serpent(SERPENT *snake, TERRAIN *terrain, JEU *jeu, PASTILLE *pill) {
         snake->pos_x[0]=snake->old_x[0]+20;
    }
 
-    for(pill->p=0; pill->p<5; pill->p++){
+    for(pill->p=0; pill->p<5 ; pill->p++){
         if(pill->pastillex[pill->p]==snake->pos_x[0] && pill->pastilley[pill->p]==snake->pos_y[0]){
             snake->segment+=2;
             pill->pastillex[pill->p] = ((rand() % (57)+1)*20);
@@ -56,5 +56,6 @@ void Update_Serpent(SERPENT *snake, TERRAIN *terrain){
         snake->old_x[i]=snake->pos_x[i];
         snake->old_y[i]=snake->pos_y[i];
     }
+    printf("x=%d | y=%d",snake->pos_x[0],snake->pos_y[0]);
 
 }
