@@ -8,41 +8,32 @@
 #include "../include/structures.h"
 #include "../include/menu.h"
 #include "../include/timer.h"
-
-
 #define CYCLE 10000L
-
 int lancer_jeu() {
-
     JEU jeu;
     TERRAIN terrain;
     SERPENT snake;
     TIMER temps;
     PASTILLE pill;
-
     jeu.direction = 4;
     jeu.last_direction = 4;
     jeu.score = 0;
     jeu.touche = 0;
     jeu.jeu_en_cours = 1;
-
     terrain.x = 600;
     terrain.y = 400;
     terrain.fond;
-
     snake.pos_x[2400];
     snake.pos_y[2400];
     snake.old_x[2400];
     snake.old_y[2400];
     snake.serpent;
     snake.segment = 10;
-
     pill.p;
     pill.pastille;
     pill.pastillex[5];
     pill.pastilley[5];
-    jeu.niveau = 0;
-
+    
     
    
     EffacerEcran(CouleurParComposante(0, 0, 0));
@@ -65,22 +56,19 @@ int lancer_jeu() {
     }
     
 }
-
 int main() {
     int choix = 0;  
  
     InitialiserGraphique();
     CreerFenetre(350, 100, 1200, 800);
     afficher_menu(&choix);
-
     if (choix == 1) {
         
         lancer_jeu();
     } else {
         printf("Aucune option sélectionnée.\n");
-    }
-
-    /*les free sont la omg */
+            }
+    
     FermerGraphique();
     return EXIT_SUCCESS;
 }

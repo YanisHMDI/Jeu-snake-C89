@@ -25,45 +25,38 @@ int i = 0;
 }
 void Controle(JEU *jeu) {
     int pause = 1;
-    while (ToucheEnAttente()) {
-        jeu->touche = Touche();
-        switch (jeu->touche) {
-            case XK_Left:
-                if (jeu->last_direction != 4) {
-                    jeu->direction = 3;
-                    jeu->last_direction = 3;
-                }
-                return;
-            case XK_Right:
-                if (jeu->last_direction != 3) {
-                    jeu->direction = 4;
-                    jeu->last_direction = 4;
-                }
-                return;
-            case XK_Up:
-                if ( jeu->last_direction != 2) {
-                     jeu->direction = 1;
-                     jeu->last_direction = 1;
-                }
-                return;
-            case XK_Down:
-                if ( jeu->last_direction != 1) {
-                     jeu->direction = 2;
-                    jeu->last_direction = 2;
-                }
-                return;
-            case XK_Escape:
-                 jeu->direction = 0;
-                 jeu->jeu_en_cours = 0;
-                 return;
 
-            case XK_space:
-                jeu->paused = jeu->paused == 1 ? 0 : 1; 
-                return;
+    if (ToucheEnAttente()) {
+        jeu->touche = Touche();
+
+        if (jeu->touche == XK_Left) {
+            if (jeu->last_direction != 4) {
+                jeu->direction = 3;
+                jeu->last_direction = 3;
+            }
+        } else if (jeu->touche == XK_Right) {
+            if (jeu->last_direction != 3) {
+                jeu->direction = 4;
+                jeu->last_direction = 4;
+            }
+        } else if (jeu->touche == XK_Up) {
+            if (jeu->last_direction != 2) {
+                jeu->direction = 1;
+                jeu->last_direction = 1;
+            }
+        } else if (jeu->touche == XK_Down) {
+            if (jeu->last_direction != 1) {
+                jeu->direction = 2;
+                jeu->last_direction = 2;
+            }
+        } else if (jeu->touche == XK_Escape) {
+            jeu->direction = 0;
+            jeu->jeu_en_cours = 0;
+        } else if (jeu->touche == XK_space) {
+            jeu->paused = jeu->paused == 1 ? 0 : 1;
+        }
     }
 }
-}
-
 void Attendre(int microsecondes) {
     unsigned long int attente = Microsecondes() + microsecondes;
     while (Microsecondes() < attente) {

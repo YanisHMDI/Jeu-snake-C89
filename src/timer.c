@@ -7,8 +7,6 @@
 #include "../include/jeu.h"
 #define CYCLE 10000L
 
-
-
 void Update_Timer(TIMER *temps){
     snprintf(temps->timer, 6, "%02d:%02d", temps->minute, temps->seconde);
     ChoisirCouleurDessin(CouleurParComposante(0,0,0));
@@ -16,7 +14,6 @@ void Update_Timer(TIMER *temps){
     ChoisirCouleurDessin(CouleurParComposante(255, 255, 255));
     EcrireTexte(10, 760, temps->timer, 2);
 }
-
 void Timer(TIMER *temps) { 
     if (Microsecondes() > temps->suivant) {
         temps->suivant = Microsecondes() + CYCLE;

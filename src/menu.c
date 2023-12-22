@@ -12,7 +12,7 @@ int check_zone(Zone z, int x, int y) {
 }
 
 int afficher_menu(int *choix) {
-    Zone boutonJouer = {741, 371, 184, 72};
+    Zone classique = {741, 371, 184, 72};
     ChargerImageFond("image/menu.png");
 
     while (1) {
@@ -22,9 +22,9 @@ int afficher_menu(int *choix) {
             int x = _X;
             int y = _Y;
 
-            if (check_zone(boutonJouer, x, y)) {
+            if (check_zone(classique, x, y)) {
                 *choix = 1;  
-                break;
+                return;
             }
         }
     }
