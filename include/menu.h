@@ -3,6 +3,6 @@
 
 #include "structures.h"
 
-int afficher_menu();
+int afficher_menu(int *choix);
 
 #endif

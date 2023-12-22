@@ -65,7 +65,7 @@ void Attendre(int microsecondes) {
 
 void Update_Score(JEU *jeu) {
     char score_str[100];
-    snprintf(score_str, 100, "Score: %d", jeu->score);
+    snprintf(score_str, 100, "SCORE: %d", jeu->score);
     ChoisirCouleurDessin(CouleurParComposante(0, 0, 0));
     RemplirRectangle(1000, 700, 1100, 800);
     ChoisirCouleurDessin(CouleurParComposante(255, 255, 255));

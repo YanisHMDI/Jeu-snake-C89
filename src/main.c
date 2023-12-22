@@ -57,18 +57,21 @@ int lancer_jeu() {
     
 }
 int main() {
-    int choix = 0;  
- 
+    int choix = 0;
+
     InitialiserGraphique();
     CreerFenetre(350, 100, 1200, 800);
     afficher_menu(&choix);
+
     if (choix == 1) {
-        
         lancer_jeu();
-    } else {
-        printf("Aucune option sélectionnée.\n");
-            }
+    } 
     
+    if (choix == 2) {
+        FermerGraphique();
+        return EXIT_SUCCESS;
+    } 
+
     FermerGraphique();
     return EXIT_SUCCESS;
 }

@@ -8,6 +8,9 @@ void DessinerScene(TIMER *temps, TERRAIN *terrain, SERPENT *snake, PASTILLE *pil
     int i;
     char timerText[6];
 
+    ChoisirCouleurDessin(CouleurParComposante(0, 0, 0));
+    RemplirRectangle(20, 600, 0, 0);
+
     snprintf(timerText, 6, "%02d:%02d", temps->minute, temps->seconde);
 
     ChoisirCouleurDessin(CouleurParComposante(181, 236, 197));

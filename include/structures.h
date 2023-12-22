@@ -51,6 +51,9 @@ struct Pastille_s{
 
 typedef struct Pastille_s PASTILLE;
 
+typedef struct {
+    int x, y, L, H;
+} Zone;
 
 
 #endif
