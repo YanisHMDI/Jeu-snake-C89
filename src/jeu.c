@@ -75,28 +75,7 @@ void Update_Score(JEU *jeu) {
    
 }
 
-void dessinerTempsFinal(unsigned long tempsEcoule) {
-    
-    
-    int fenetreLargeur = 1200;
-    int fenetreHauteur = 800;
-    int texteLargeur = 100; 
-    int texteHauteur = 20;  
-    
-    unsigned long minutes, secondes;
-    char tempsString[10];
 
-    
-    minutes = tempsEcoule / 60;
-    secondes = tempsEcoule % 60;
-
-    
-    snprintf(tempsString, sizeof(tempsString), "%02lu:%02lu", minutes, secondes);
-
-    
-    ChoisirCouleurDessin(CouleurParComposante(0, 0, 0));  
-    EcrireTexte(X_POSITION, Y_POSITION, tempsString, 2);
-}
 
 void dessinerScoreFin(int score) {
  char scoreString[20];

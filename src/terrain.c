@@ -37,5 +37,6 @@ void DessinerScene(TIMER *temps, TERRAIN *terrain, SERPENT *snake, PASTILLE *pil
         pill->pastillex[pill->p] = ((rand() % (57) + 1) * 20);
         pill->pastilley[pill->p] = ((rand() % (34) + 1) * 20);
         AfficherSprite(pill->pastille, pill->pastillex[pill->p], pill->pastilley[pill->p]);
+        
     }
 }
