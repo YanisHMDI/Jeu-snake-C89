@@ -6,7 +6,7 @@
 #include "../include/structures.h"
 
 
-void Serpent(SERPENT *snake, TERRAIN *terrain, JEU *jeu, PASTILLE *pill) {
+void Serpent(SERPENT *snake, TERRAIN *terrain, JEU *jeu, PASTILLE *pill, TIMER *temps) {
     if (jeu->direction == 1 && jeu->direction != 2 ){
         snake->pos_y[0]=snake->old_y[0]-20;
     }
@@ -19,7 +19,11 @@ void Serpent(SERPENT *snake, TERRAIN *terrain, JEU *jeu, PASTILLE *pill) {
     if (jeu->direction == 4 && jeu->direction != 3) {
         snake->pos_x[0]=snake->old_x[0]+20;
    }
-
+    ConditionDefaite(jeu, terrain, snake);
+    
+    if (!jeu->jeu_en_cours) {
+        fin_de_jeu(jeu, temps);
+    }
    
    for (pill->p = 0; pill->p < 5; pill->p++) {
         if (pill->pastillex[pill->p] == snake->pos_x[0] && pill->pastilley[pill->p] == snake->pos_y[0]) {

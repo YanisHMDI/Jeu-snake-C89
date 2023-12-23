@@ -6,6 +6,8 @@
 #include "../include/structures.h"
 #define CYCLE 10000L
 #define TAILLE_INITIALE_SERPENT 10
+#define X_POSITION 500
+#define Y_POSITION 400
 
 
 
@@ -66,12 +68,60 @@ void Attendre(int microsecondes) {
 void Update_Score(JEU *jeu) {
     char score_str[100];
     snprintf(score_str, 100, "SCORE: %d", jeu->score);
-    ChoisirCouleurDessin(CouleurParComposante(0, 0, 0));
+    ChoisirCouleurDessin(CouleurParComposante(114,148,77));
     RemplirRectangle(1000, 700, 1100, 800);
     ChoisirCouleurDessin(CouleurParComposante(255, 255, 255));
     EcrireTexte(1000, 760, score_str, 2);
    
 }
 
+void dessinerTempsFinal(unsigned long tempsEcoule) {
+    
+    
+    int fenetreLargeur = 1200;
+    int fenetreHauteur = 800;
+    int texteLargeur = 100; 
+    int texteHauteur = 20;  
+    
+    unsigned long minutes, secondes;
+    char tempsString[10];
 
+    
+    minutes = tempsEcoule / 60;
+    secondes = tempsEcoule % 60;
 
+    
+    snprintf(tempsString, sizeof(tempsString), "%02lu:%02lu", minutes, secondes);
+
+    
+    ChoisirCouleurDessin(CouleurParComposante(0, 0, 0));  
+    EcrireTexte(X_POSITION, Y_POSITION, tempsString, 2);
+}
+
+void dessinerScoreFin(int score) {
+ char scoreString[20];
+    int fenetreLargeur = 1200;
+    int fenetreHauteur = 800;
+    int texteLargeur = 100; 
+    int texteHauteur = 20;
+    
+
+    
+    snprintf(scoreString, sizeof(scoreString), "Score final : %d", score);
+
+    ChoisirCouleurDessin(CouleurParComposante(0, 0, 0));  
+    EcrireTexte(X_POSITION, Y_POSITION, scoreString, 2);
+
+}
+
+void fin_de_jeu(JEU *jeu, TIMER *temps) {
+    unsigned long tempsEcoule = temps->minute * 60 + temps->seconde;
+    
+    
+    dessinerTempsFinal(tempsEcoule);
+    
+
+    dessinerScoreFin(jeu->score);
+    FermerGraphique();
+    exit(EXIT_SUCCESS);
+}

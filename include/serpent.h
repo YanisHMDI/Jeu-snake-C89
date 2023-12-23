@@ -6,6 +6,6 @@
 
 
 void Update_Serpent(SERPENT *snake, TERRAIN *terrain);
-void Serpent(SERPENT *snake, TERRAIN *terrain, JEU *jeu, PASTILLE *pill);
+void Serpent(SERPENT *snake, TERRAIN *terrain, JEU *jeu, PASTILLE *pill, TIMER *temps);
 
 #endif 

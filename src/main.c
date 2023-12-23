@@ -9,11 +9,13 @@
 #include "../include/menu.h"
 #include "../include/timer.h"
 #define CYCLE 10000L
+
+
 int lancer_jeu() {
     JEU jeu;
+    TIMER temps ;
     TERRAIN terrain;
     SERPENT snake;
-    TIMER temps;
     PASTILLE pill;
     jeu.direction = 4;
     jeu.last_direction = 4;
@@ -36,26 +38,29 @@ int lancer_jeu() {
     
     
    
-    EffacerEcran(CouleurParComposante(0, 0, 0));
+   EffacerEcran(CouleurParComposante(114, 148, 77));
     temps.suivant = Microsecondes() + CYCLE;
     temps.old_seconde = (temps.suivant / 1000000) % 10;
-    DessinerScene(&temps, &terrain, &snake, &pill);
-    ChoisirCouleurDessin(CouleurParComposante(0,0,0));
+
+    DessinerScene(&temps, &terrain, &snake, &pill); 
+
+    ChoisirCouleurDessin(CouleurParComposante(114, 148, 77));
     RemplirRectangle(0, 700, 1200, 800);
     RemplirRectangle(0, 0, 20, 20);
-   
-    while (jeu.jeu_en_cours) {
+     while (jeu.jeu_en_cours) {
         Controle(&jeu);
         if (jeu.paused == 0) {
             Timer(&temps);
             Update_Timer(&temps);
-            Serpent(&snake, &terrain, &jeu, &pill);
+            Serpent(&snake, &terrain, &jeu, &pill,&temps);
             Pastille(&pill);
             Update_Score(&jeu);
         }
     }
-    
+    dessinerTempsFinal(temps.seconde);
+    dessinerScoreFin(jeu.score);   
 }
+
 int main() {
     int choix = 0;
 
@@ -64,7 +69,14 @@ int main() {
     afficher_menu(&choix);
 
     if (choix == 1) {
-        lancer_jeu();
+        TIMER temps;
+        temps.minute = 0;
+        temps.seconde = 0;
+        temps.seconde_actuel = 0;
+        temps.old_seconde = 0;
+        temps.suivant = Microsecondes() + CYCLE;
+
+        lancer_jeu(&temps);
     } 
     
     if (choix == 2) {

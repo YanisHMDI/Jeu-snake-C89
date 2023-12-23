@@ -9,7 +9,7 @@
 
 void Update_Timer(TIMER *temps){
     snprintf(temps->timer, 6, "%02d:%02d", temps->minute, temps->seconde);
-    ChoisirCouleurDessin(CouleurParComposante(0,0,0));
+    ChoisirCouleurDessin(CouleurParComposante(114,148,77));
     RemplirRectangle(0, 700, 400, 800);
     ChoisirCouleurDessin(CouleurParComposante(255, 255, 255));
     EcrireTexte(10, 760, temps->timer, 2);
