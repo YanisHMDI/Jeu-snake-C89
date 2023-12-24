@@ -36,8 +36,6 @@ void Timer(TIMER *temps) {
 void dessinerTempsFinal(unsigned long tempsEcoule) {
     
     
-    int fenetreLargeur = 1200;
-    int fenetreHauteur = 800;
     int texteLargeur = 100; 
     int texteHauteur = 20;  
     
@@ -55,3 +53,4 @@ void dessinerTempsFinal(unsigned long tempsEcoule) {
     ChoisirCouleurDessin(CouleurParComposante(0, 0, 0));  
     EcrireTexte(X_POSITION, Y_POSITION, tempsString, 2);
 }
+

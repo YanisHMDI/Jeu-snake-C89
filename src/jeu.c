@@ -24,7 +24,15 @@ int i = 0;
         if (snake->pos_x[0] == snake->pos_x[i] && snake->pos_y[0] == snake->pos_y[i])
         jeu->jeu_en_cours = 0;
     }
+    if (terrain->obstacle_on == 1){
+        for(terrain->o = 0; terrain->o<11; terrain->o++){
+            if(terrain->obstaclex[terrain->o]==snake->pos_x[0] && terrain->obstacley[terrain->o]==snake->pos_y[0]){
+                jeu->jeu_en_cours = 0 ;
+            }
+        }
+    }
 }
+
 void Controle(JEU *jeu) {
     int pause = 1;
 
@@ -79,8 +87,6 @@ void Update_Score(JEU *jeu) {
 
 void dessinerScoreFin(int score) {
  char scoreString[20];
-    int fenetreLargeur = 1200;
-    int fenetreHauteur = 800;
     int texteLargeur = 100; 
     int texteHauteur = 20;
     
@@ -99,7 +105,7 @@ void fin_de_jeu(JEU *jeu, TIMER *temps) {
     
     dessinerTempsFinal(tempsEcoule);
     
-
+    Attendre(100);
     dessinerScoreFin(jeu->score);
     FermerGraphique();
     exit(EXIT_SUCCESS);

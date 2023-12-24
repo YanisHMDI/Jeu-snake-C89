@@ -7,6 +7,7 @@
 
 void Controle(JEU *jeu);
 void ConditionDefaite(JEU *jeu, TERRAIN *terrain, SERPENT *snake);
+void obstacle(void);
 void Update_Score(JEU *jeu);
 void Attendre(int microsecondes);
 void fin_de_jeu(JEU *jeu, TIMER *temps);

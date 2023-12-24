@@ -15,7 +15,12 @@ typedef struct Timer_s TIMER;
 struct Terrain_s{
     int x;
     int y;
-    int fond;
+    int fond ;
+    int o  ;
+    int obstacle;
+    int obstacle_on ;
+    int obstaclex[15];
+    int obstacley[15];
 };
 
 typedef struct Terrain_s TERRAIN;

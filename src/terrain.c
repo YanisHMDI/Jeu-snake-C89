@@ -8,8 +8,7 @@ void DessinerScene(TIMER *temps, TERRAIN *terrain, SERPENT *snake, PASTILLE *pil
     int i;
     char timerText[6];
 
-    ChoisirCouleurDessin(CouleurParComposante(114,148,77));
-    RemplirRectangle(20, 600, 0, 0);
+    
 
     snprintf(timerText, 6, "%02d:%02d", temps->minute, temps->seconde);
 
@@ -37,6 +36,17 @@ void DessinerScene(TIMER *temps, TERRAIN *terrain, SERPENT *snake, PASTILLE *pil
         pill->pastillex[pill->p] = ((rand() % (57) + 1) * 20);
         pill->pastilley[pill->p] = ((rand() % (34) + 1) * 20);
         AfficherSprite(pill->pastille, pill->pastillex[pill->p], pill->pastilley[pill->p]);
-        
+        ChoisirCouleurDessin(CouleurParComposante(114, 148, 77));
+        RemplirRectangle(0,0,20,800);
     }
-}
+
+if (terrain->obstacle_on == 1){  
+        terrain->obstacle=ChargerSprite("image/mur.png");
+        
+        for (terrain->o = 0; terrain->o < 10; terrain->o++) {
+            terrain->obstaclex[terrain->o] = ((rand() % (57)+1)*20);
+            terrain->obstacley[terrain->o] = ((rand() % (34)+1)*20);
+            AfficherSprite(terrain->obstacle, terrain->obstaclex[terrain->o],terrain->obstacley[terrain->o]);
+        }
+    }
+}    
