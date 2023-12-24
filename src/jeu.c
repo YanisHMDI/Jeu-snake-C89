@@ -6,39 +6,44 @@
 #include "../include/structures.h"
 #define CYCLE 10000L
 #define TAILLE_INITIALE_SERPENT 10
-#define X_POSITION 500
-#define Y_POSITION 400
 
-
-
-
+/* Fonction qui vérifie les conditions de défaite du jeu*/
 void ConditionDefaite(JEU *jeu, TERRAIN *terrain, SERPENT *snake) {
-int i = 0;
-    if (snake->pos_x[0] > 1180 || snake->pos_x[0] < 20){
+    int i = 0;
+
+    /* Conditions liées à la position du serpent*/
+    if (snake->pos_x[0] > 1180 || snake->pos_x[0] < 20) {
         jeu->jeu_en_cours = 0;
     }
-    if (snake->pos_y[0] < 20 || snake->pos_y[0] > 680){
+    if (snake->pos_y[0] < 20 || snake->pos_y[0] > 680) {
         jeu->jeu_en_cours = 0;
     }
+
+    /* Condition de collision avec le corps du serpent*/
     for (i = 1; i < snake->segment; i++) {
         if (snake->pos_x[0] == snake->pos_x[i] && snake->pos_y[0] == snake->pos_y[i])
-        jeu->jeu_en_cours = 0;
+            jeu->jeu_en_cours = 0;
     }
-    if (terrain->obstacle_on == 1){
-        for(terrain->o = 0; terrain->o<11; terrain->o++){
-            if(terrain->obstaclex[terrain->o]==snake->pos_x[0] && terrain->obstacley[terrain->o]==snake->pos_y[0]){
-                jeu->jeu_en_cours = 0 ;
+
+    /* Condition de collision avec les obstacles du terrain*/
+    if (terrain->obstacle_on == 1) {
+        for (terrain->o = 0; terrain->o < 11; terrain->o++) {
+            if (terrain->obstaclex[terrain->o] == snake->pos_x[0] && terrain->obstacley[terrain->o] == snake->pos_y[0]) {
+                jeu->jeu_en_cours = 0;
             }
         }
     }
 }
 
+/* Fonction qui gère les commandes du joueur*/
 void Controle(JEU *jeu) {
     int pause = 1;
 
+    /* Vérifie si une touche est en attente*/
     if (ToucheEnAttente()) {
         jeu->touche = Touche();
 
+        /* Gestion des commandes*/
         if (jeu->touche == XK_Left) {
             if (jeu->last_direction != 4) {
                 jeu->direction = 3;
@@ -67,46 +72,31 @@ void Controle(JEU *jeu) {
         }
     }
 }
+
+/* Fonction qui met en pause le jeu pour un certain nombre de microsecondes*/
 void Attendre(int microsecondes) {
     unsigned long int attente = Microsecondes() + microsecondes;
     while (Microsecondes() < attente) {
     }
 }
 
+/* Fonction qui met à jour le score affiché à l'écran*/
 void Update_Score(JEU *jeu) {
-    char score_str[100];
-    snprintf(score_str, 100, "SCORE: %d", jeu->score);
-    ChoisirCouleurDessin(CouleurParComposante(114,148,77));
+    snprintf(jeu->score_str, 100, "SCORE: %d", jeu->score);
+    ChoisirCouleurDessin(CouleurParComposante(114, 148, 77));
     RemplirRectangle(1000, 700, 1100, 800);
     ChoisirCouleurDessin(CouleurParComposante(255, 255, 255));
-    EcrireTexte(1000, 760, score_str, 2);
-   
+    EcrireTexte(1000, 760, jeu->score_str, 2);
 }
 
+/* Fonction qui affiche l'écran de fin du jeu avec le score et le temps final*/
+void EcranFinJeu(JEU *jeu, TIMER *temps) {
+    ChargerImageFond("image/menudefin.png");
 
+    /* Affichage du score et du temps final*/
+    snprintf(jeu->score_str, 100, "%d", jeu->score);
+    EcrireTexte(500, 270, jeu->score_str, 2);
+    EcrireTexte(500, 400, temps->timer, 2);
 
-void dessinerScoreFin(int score) {
- char scoreString[20];
-    int texteLargeur = 100; 
-    int texteHauteur = 20;
-    
-
-    
-    snprintf(scoreString, sizeof(scoreString), "Score final : %d", score);
-
-    ChoisirCouleurDessin(CouleurParComposante(0, 0, 0));  
-    EcrireTexte(X_POSITION, Y_POSITION, scoreString, 2);
-
-}
-
-void fin_de_jeu(JEU *jeu, TIMER *temps) {
-    unsigned long tempsEcoule = temps->minute * 60 + temps->seconde;
-    
-    
-    dessinerTempsFinal(tempsEcoule);
-    
-    Attendre(100);
-    dessinerScoreFin(jeu->score);
-    FermerGraphique();
-    exit(EXIT_SUCCESS);
+    Attendre(30000000);
 }

@@ -1,6 +1,5 @@
 #ifndef JEU_H
 #define JEU_H
-
 #include "structures.h"
 
 
@@ -10,9 +9,7 @@ void ConditionDefaite(JEU *jeu, TERRAIN *terrain, SERPENT *snake);
 void obstacle(void);
 void Update_Score(JEU *jeu);
 void Attendre(int microsecondes);
-void fin_de_jeu(JEU *jeu, TIMER *temps);
-
-
+void EcranFinJeu(JEU *jeu, TIMER *temps);
 
 
 #endif
